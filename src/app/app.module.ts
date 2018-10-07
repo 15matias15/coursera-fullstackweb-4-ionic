@@ -16,12 +16,27 @@ import { PromotionProvider } from '../providers/promotion/promotion';
 import { ProcessHttpmsgProvider } from '../providers/process-httpmsg/process-httpmsg';
 import { baseURL } from '../shared/baseurl';
 import { HttpClientModule } from '@angular/common/http';
+import { DishdetailPage } from '../pages/dishdetail/dishdetail';
 
 @NgModule({
-  declarations: [MyApp, HomePage, AboutPage, MenuPage, ContactPage],
+  declarations: [
+    MyApp,
+    HomePage,
+    AboutPage,
+    MenuPage,
+    ContactPage,
+    DishdetailPage
+  ],
   imports: [BrowserModule, HttpClientModule, IonicModule.forRoot(MyApp)],
   bootstrap: [IonicApp],
-  entryComponents: [MyApp, HomePage, AboutPage, MenuPage, ContactPage],
+  entryComponents: [
+    MyApp,
+    HomePage,
+    AboutPage,
+    MenuPage,
+    ContactPage,
+    DishdetailPage
+  ],
   providers: [
     StatusBar,
     SplashScreen,
