@@ -46,9 +46,8 @@
         </ion-list>
     </div>
     <div [hidden]="leaders || errMess">
-        <ion-spinner>
-            <h4>Loading . . . Please Wait</h4>
-        </ion-spinner>
+        <ion-spinner></ion-spinner>
+        <h4>Loading . . . Please Wait</h4>
     </div>
     <div *ngIf="errMess">
         <h2>Error</h2>
