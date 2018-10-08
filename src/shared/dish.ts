@@ -8,5 +8,6 @@ export interface Dish {
   label: string;
   price: string;
   featured: boolean;
+  description: string;
   comments: Comment[];
 }
