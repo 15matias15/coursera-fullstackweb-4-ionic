@@ -28,7 +28,6 @@ export class DishdetailPage {
     this.dish = navParams.get('dish');
     this.numcomments = this.dish.comments.length;
 
-    console.log('dish:', this.dish);
     let total = 0;
     this.dish.comments.forEach(comment => (total += comment.rating));
     this.avgstars = (total / this.numcomments).toFixed(2);

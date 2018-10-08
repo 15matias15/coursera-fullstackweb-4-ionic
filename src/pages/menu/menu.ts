@@ -27,10 +27,6 @@ export class MenuPage implements OnInit {
     private dishservice: DishProvider
   ) {}
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad MenuPage');
-  }
-
   ngOnInit() {
     this.dishservice
       .getDishes()
