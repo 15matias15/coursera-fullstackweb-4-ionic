@@ -19,6 +19,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { DishdetailPage } from '../pages/dishdetail/dishdetail';
 import { FavoriteProvider } from '../providers/favorite/favorite';
 import { FavoritesPage } from '../pages/favorites/favorites';
+import { ReservationPage } from '../pages/reservation/reservation';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { FavoritesPage } from '../pages/favorites/favorites';
     MenuPage,
     ContactPage,
     DishdetailPage,
-    FavoritesPage
+    FavoritesPage,
+    ReservationPage
   ],
   imports: [BrowserModule, HttpClientModule, IonicModule.forRoot(MyApp)],
   bootstrap: [IonicApp],
@@ -39,7 +41,8 @@ import { FavoritesPage } from '../pages/favorites/favorites';
     MenuPage,
     ContactPage,
     DishdetailPage,
-    FavoritesPage
+    FavoritesPage,
+    ReservationPage
   ],
   providers: [
     StatusBar,
