@@ -3,7 +3,10 @@ import {
   IonicPage,
   NavController,
   NavParams,
-  ItemSliding
+  ItemSliding,
+  ToastController,
+  LoadingController,
+  AlertController
 } from 'ionic-angular';
 import { FavoriteProvider } from '../../providers/favorite/favorite';
 import { Dish } from '../../shared/dish';
@@ -28,7 +31,10 @@ export class FavoritesPage implements OnInit {
     public navCtrl: NavController,
     public navParams: NavParams,
     @Inject('BaseURL') public BaseURL,
-    private favoriteservice: FavoriteProvider
+    private favoriteservice: FavoriteProvider,
+    private toastCtrl: ToastController,
+    private loadingCtrl: LoadingController,
+    private alertCtrl: AlertController
   ) {}
 
   ngOnInit() {
@@ -41,12 +47,42 @@ export class FavoritesPage implements OnInit {
   }
 
   deleteFavorite(item: ItemSliding, id: number) {
-    this.favoriteservice
-      .deleteFavorite(id)
-      .subscribe(
-        favorites => (this.favorites = favorites),
-        errmess => (this.errMess = errmess)
-      );
+    const alert = this.alertCtrl.create({
+      title: 'Confirm Title',
+      message: 'Do you want to delete Favorite ' + id,
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {}
+        },
+        {
+          text: 'Delete',
+          handler: () => {
+            const loading = this.loadingCtrl.create({
+              content: 'Deleting . . .'
+            });
+            const toast = this.toastCtrl.create({
+              message: 'Dish  ' + id + ' deleted successfully',
+              duration: 3000
+            });
+            loading.present();
+            this.favoriteservice.deleteFavorite(id).subscribe(
+              favorites => {
+                this.favorites = favorites;
+                loading.dismiss();
+                toast.present();
+              },
+              errmess => {
+                this.errMess = errmess;
+                loading.dismiss();
+              }
+            );
+          }
+        }
+      ]
+    });
+    alert.present();
     item.close();
   }
 }

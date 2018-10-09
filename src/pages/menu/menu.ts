@@ -1,5 +1,10 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {
+  IonicPage,
+  NavController,
+  NavParams,
+  ToastController
+} from 'ionic-angular';
 import { Dish } from '../../shared/dish';
 import { DishProvider } from '../../providers/dish/dish';
 import { DishdetailPage } from '../dishdetail/dishdetail';
@@ -26,7 +31,8 @@ export class MenuPage implements OnInit {
     public navParams: NavParams,
     @Inject('BaseURL') public BaseURL,
     private dishservice: DishProvider,
-    private favoriteservice: FavoriteProvider
+    private favoriteservice: FavoriteProvider,
+    private toastCtrl: ToastController
   ) {}
 
   ngOnInit() {
@@ -46,5 +52,11 @@ export class MenuPage implements OnInit {
 
   addToFavorites(dish: Dish) {
     this.favoriteservice.addFavorite(dish.id);
+    this.toastCtrl
+      .create({
+        message: 'Dish ' + dish.name + ' added as a favorite successfully',
+        duration: 3000
+      })
+      .present();
   }
 }
