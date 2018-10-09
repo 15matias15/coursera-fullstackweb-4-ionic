@@ -40,7 +40,7 @@ export class MenuPage implements OnInit {
       .getDishes()
       .subscribe(
         dishes => (this.dishes = dishes),
-        errmess => (this.errMess = this.errMess)
+        errmess => (this.errMess = errmess)
       );
   }
 

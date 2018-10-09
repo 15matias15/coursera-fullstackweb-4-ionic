@@ -6,9 +6,10 @@ import {
   ViewController
 } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Comment } from '../../shared/comment';
 
 /**
- * Generated class for the ReservationPage page.
+ * Generated class for the CommentPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -16,11 +17,12 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @IonicPage()
 @Component({
-  selector: 'page-reservation',
-  templateUrl: 'reservation.html'
+  selector: 'page-comment',
+  templateUrl: 'comment.html'
 })
-export class ReservationPage {
-  reservation: FormGroup;
+export class CommentPage {
+  comment: Comment;
+  commentForm: FormGroup;
 
   constructor(
     public navCtrl: NavController,
@@ -28,10 +30,10 @@ export class ReservationPage {
     public viewCtrl: ViewController,
     private formBuilder: FormBuilder
   ) {
-    this.reservation = this.formBuilder.group({
-      guests: 3,
-      smoking: false,
-      dateTime: ['', Validators.required]
+    this.commentForm = this.formBuilder.group({
+      rating: 5,
+      author: ['', Validators.required],
+      comment: ['', Validators.required]
     });
   }
 
@@ -40,6 +42,10 @@ export class ReservationPage {
   }
 
   onSubmit() {
-    console.log(this.reservation.value);
+    let date = new Date();
+    let datevalue = date.toISOString();
+    this.comment = this.commentForm.value;
+    this.comment['date'] = datevalue;
+    this.viewCtrl.dismiss(this.comment);
   }
 }
