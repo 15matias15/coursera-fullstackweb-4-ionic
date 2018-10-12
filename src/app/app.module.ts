@@ -11,6 +11,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { LocalNotifications } from '@ionic-native/local-notifications';
 import { EmailComposer } from '@ionic-native/email-composer';
 import { SocialSharing } from '@ionic-native/social-sharing';
+import { Camera } from '@ionic-native/camera';
 
 import { MenuPage } from '../pages/menu/menu';
 import { AboutPage } from '../pages/about/about';
@@ -27,6 +28,7 @@ import { FavoritesPage } from '../pages/favorites/favorites';
 import { ReservationPage } from '../pages/reservation/reservation';
 import { CommentPage } from '../pages/comment/comment';
 import { LoginPage } from '../pages/login/login';
+import { RegisterPage } from '../pages/register/register';
 
 @NgModule({
   declarations: [
@@ -39,7 +41,8 @@ import { LoginPage } from '../pages/login/login';
     FavoritesPage,
     ReservationPage,
     CommentPage,
-    LoginPage
+    LoginPage,
+    RegisterPage
   ],
   imports: [
     BrowserModule,
@@ -58,7 +61,8 @@ import { LoginPage } from '../pages/login/login';
     FavoritesPage,
     ReservationPage,
     CommentPage,
-    LoginPage
+    LoginPage,
+    RegisterPage
   ],
   providers: [
     StatusBar,
@@ -72,7 +76,8 @@ import { LoginPage } from '../pages/login/login';
     FavoriteProvider,
     LocalNotifications,
     EmailComposer,
-    SocialSharing
+    SocialSharing,
+    Camera
   ]
 })
 export class AppModule {}
