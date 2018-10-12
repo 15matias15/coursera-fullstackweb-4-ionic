@@ -8,6 +8,8 @@ import { HomePage } from '../pages/home/home';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { LocalNotifications } from '@ionic-native/local-notifications';
+
 import { MenuPage } from '../pages/menu/menu';
 import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
@@ -65,7 +67,8 @@ import { LoginPage } from '../pages/login/login';
     PromotionProvider,
     { provide: 'BaseURL', useValue: baseURL },
     ProcessHttpmsgProvider,
-    FavoriteProvider
+    FavoriteProvider,
+    LocalNotifications
   ]
 })
 export class AppModule {}

@@ -10,7 +10,7 @@ import {
 } from 'ionic-angular';
 import { FavoriteProvider } from '../../providers/favorite/favorite';
 import { Dish } from '../../shared/dish';
-
+import { Storage } from '@ionic/storage';
 /**
  * Generated class for the FavoritesPage page.
  *
@@ -34,7 +34,8 @@ export class FavoritesPage implements OnInit {
     private favoriteservice: FavoriteProvider,
     private toastCtrl: ToastController,
     private loadingCtrl: LoadingController,
-    private alertCtrl: AlertController
+    private alertCtrl: AlertController,
+    private storage: Storage
   ) {}
 
   ngOnInit() {
@@ -78,6 +79,7 @@ export class FavoritesPage implements OnInit {
                 loading.dismiss();
               }
             );
+            this.storage.remove('id');
           }
         }
       ]

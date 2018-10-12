@@ -4,6 +4,8 @@ import { Dish } from '../../shared/dish';
 import { DishProvider } from '../dish/dish';
 import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators';
+import { Storage } from '@ionic/storage';
+import { LocalNotifications } from '@ionic-native/local-notifications';
 
 /*
   Generated class for the FavoriteProvider provider.
@@ -14,12 +16,29 @@ import { map } from 'rxjs/operators';
 @Injectable()
 export class FavoriteProvider {
   favorites: Array<any>;
-  constructor(public http: HttpClient, private dishservice: DishProvider) {
+  constructor(
+    public http: HttpClient,
+    private dishservice: DishProvider,
+    private storage: Storage,
+    private localNotifications: LocalNotifications
+  ) {
     this.favorites = [];
+    storage.get('favoritesDish').then(fav => {
+      if (fav) {
+        this.favorites = fav;
+      }
+    });
   }
 
   addFavorite(id: number): boolean {
-    if (!this.isFavorite(id)) this.favorites.push(id);
+    if (!this.isFavorite(id)) {
+      this.favorites.push(id);
+      this.storage.set('favorites', this.favorites);
+      this.localNotifications.schedule({
+        id: id,
+        text: 'Dish ' + id + ' added as a favorite successfully'
+      });
+    }
     return true;
   }
 
@@ -30,21 +49,20 @@ export class FavoriteProvider {
   getFavorites(): Observable<Dish[]> {
     return this.dishservice
       .getDishes()
-      .pipe(
-        map(dishes =>
-          dishes.filter(dish => this.favorites.some(el => el === dish.id))
-        )
+      .map(dishes =>
+        dishes.filter(dish => this.favorites.some(el => el === dish.id))
       );
   }
 
   deleteFavorite(id: number): Observable<Dish[]> {
-    const index = this.favorites.indexOf(id);
+    let index = this.favorites.indexOf(id);
     if (index >= 0) {
       this.favorites.splice(index, 1);
+      this.storage.set('favorites', this.favorites);
       return this.getFavorites();
     } else {
       console.log('Deleting non-existant favorite', id);
-      return Observable.throw('Deleting non-existante favorite' + id);
+      return Observable.throw('Deleting non-existant favorite' + id);
     }
   }
 }
